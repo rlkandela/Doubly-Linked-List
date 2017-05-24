@@ -15,29 +15,29 @@ public:
     void MakeListNull();
 };
 
-
 template <class T>
 List<T>::List (T key){
     head=new Node<T>(key);
-    head->back=nullptr;
+    head->setBack(nullptr);
     heap=head;
-    heap->next=nullptr;
+    heap->setNext(nullptr);
 }
 template <class T>
 List<T>::List (std::vector<T>& v){
     if(v.size()>0){
         head=new Node<T>(v[0]);
-        head->back=nullptr;
+        head->setBack(nullptr);
         Node<T>* nx=head;
-        for (int cont=1;cont<v.size()-1;cont++){
-            nx->next=new Node<T>(v[cont]);
-            nx->next->back=nx;
-            nx=nx->next;
+        for (int cont=1;cont<v.size();cont++){
+            nx->setNext(new Node<T>(v[cont]));
+            nx->getNext()->setBack(nx);
+            nx=nx->getNext();
         }
-        heap=new Node<T>(v[v.size()-1]);
-        heap->next=nullptr;
+        heap=nx;
+        heap->setNext(nullptr);
     }
 }
+
 template <class T>
 List<T>::~List(){
     this->MakeListNull();
