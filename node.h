@@ -1,20 +1,30 @@
 ﻿#ifndef __NODOS_LISTA_DOBLE__
 #define __NODOS_LISTA_DOBLE__
 #include <vector>
+#include <sstream>
 template<class T>
 class Node{
 private:
     Node<T>* back;
     Node<T>* next;
     T key;
-public:
+protected:
+    Node ();
     Node (T key);
+    Node<T>* getNode(T key);
+    Node<T>* getNode();
+public:
     virtual ~Node();
     void setBack(Node<T>* ptr);
     Node<T>* getBack();
     void setNext(Node<T>* ptr);
     Node<T>* getNext();
+    void setKey(T ket);
+    T& getKey();
 };
+
+template <class T>
+Node<T>::Node(){}
 
 template <class T>
 Node<T>::Node(T key){
@@ -24,6 +34,14 @@ Node<T>::Node(T key){
 }
 template <class T>
 Node<T>::~Node(){}
+template <class T>
+Node<T>* Node<T>::getNode(T key){
+    return new Node<T>(key);
+}
+template <class T>
+Node<T>* Node<T>::getNode(){
+    return new Node<T>();
+}
 template <class T>
 void Node<T>::setBack(Node<T>* ptr){
     this->back=ptr;
@@ -36,4 +54,13 @@ void Node<T>::setNext(Node<T>* ptr){
 }
 template <class T>
 Node<T>* Node<T>::getNext(){return next;}
+
+template <class T>
+void Node<T>::setKey(T key){
+    this->key=key;
+}
+template <class T>
+T& Node<T>::getKey(){
+    return this->key;
+}
 #endif
